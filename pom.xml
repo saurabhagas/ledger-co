@@ -37,7 +37,7 @@
                         <manifest>
                             <addClasspath>true</addClasspath>
                             <!-- This is main class of your program which will be executed-->
-                            <mainClass>org.example.LedgerCoFacade</mainClass>
+                            <mainClass>org.example.FileParser</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
