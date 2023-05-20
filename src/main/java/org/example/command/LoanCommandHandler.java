@@ -43,7 +43,7 @@ public class LoanCommandHandler implements CommandHandler {
         String customerName = commandTokens[2];
         long principal = Integer.parseInt(commandTokens[3]);
         int years = Integer.parseInt(commandTokens[4]);
-        int interestRate = Integer.parseInt(commandTokens[4]);
+        int interestRate = Integer.parseInt(commandTokens[5]);
         loanRegistry.registerLoan(bankName, customerName, principal, years, interestRate);
         return Optional.empty();
     }

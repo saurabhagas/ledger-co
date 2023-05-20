@@ -54,7 +54,7 @@ public class BalanceCommandHandler implements CommandHandler {
         LoanDetails loanDetails = loanRegistry.getLoanDetails(customerIdentity);
         long paidViaBulkPayments = paymentRegistry.getPaymentsOnOrBefore(customerIdentity, emiNo);
         long totalPaid = emiNo * loanDetails.getEmiVal() + paidViaBulkPayments;
-        int remEmis = (int) Math.ceil((loanDetails.getDueAmount() - paidViaBulkPayments) / (double) loanDetails.getEmiVal());
+        int remEmis = (int) Math.ceil((loanDetails.getDueAmount() - totalPaid) / (double) loanDetails.getEmiVal());
         return Optional.of(bankName + " " + customerName + " " + totalPaid + " " + remEmis);
     }
 }

@@ -3,6 +3,7 @@ package org.example.registry;
 import org.example.model.CustomerIdentity;
 import org.example.model.PaymentDetails;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -20,7 +21,7 @@ public class BulkPaymentRegistry {
     }
 
     public long getPaymentsOnOrBefore(CustomerIdentity customerIdentity, int emiNo) {
-        return registry.get(customerIdentity)
+        return registry.getOrDefault(customerIdentity, Collections.emptySet())
             .stream()
             .filter(paymentDetails -> paymentDetails.getPostEmi() <= emiNo)
             .mapToLong(PaymentDetails::getPayment)
