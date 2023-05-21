@@ -8,7 +8,6 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Optional;
-import java.util.stream.Stream;
 
 public class FileParser {
     private final CachingCommandHandlerFactory handlerFactory;
@@ -18,9 +17,7 @@ public class FileParser {
     }
 
     public void parseFile(Path filePath) throws IOException {
-        try (Stream<String> filestream = Files.lines(filePath)) {
-            filestream.forEach(line -> parseLine(line).ifPresent(System.out::println));
-        }
+        Files.lines(filePath).forEach(line -> parseLine(line).ifPresent(System.out::println));
     }
 
     Optional<String> parseLine(String line) {

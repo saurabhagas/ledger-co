@@ -6,7 +6,6 @@ import org.example.registry.CachingRegistryFactory;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.nio.file.FileSystemException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -18,15 +17,11 @@ public class Facade {
         }
 
         Path filePath = Paths.get(args[0]);
-        if (!Files.exists(filePath)) {
-            throw new FileNotFoundException("File doesn't exist at path: " + filePath);
-        }
         if (!Files.isReadable(filePath)) {
-            throw new FileSystemException("File at path: " + filePath + " can't be read");
+            throw new FileNotFoundException("File at path: " + filePath + " doesn't exist or isn't readable");
         }
 
-        CachingRegistryFactory registryFactory = new CachingRegistryFactory();
-        CachingCommandHandlerFactory handlerFactory = new CachingCommandHandlerFactory(registryFactory);
+        CachingCommandHandlerFactory handlerFactory = new CachingCommandHandlerFactory(new CachingRegistryFactory());
         new FileParser(handlerFactory).parseFile(filePath);
     }
 }

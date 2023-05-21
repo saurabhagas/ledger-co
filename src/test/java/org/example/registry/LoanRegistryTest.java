@@ -23,7 +23,7 @@ public class LoanRegistryTest {
     public void testRegisterLoan() {
         loanRegistry.registerLoan(customerIdentity, 10000, 5, 4);
         LoanDetails loanDetails = loanRegistry.getLoanDetails(customerIdentity);
-        LoanDetails expectedLoanDetails = new LoanDetails(12000, 60, 200);
+        LoanDetails expectedLoanDetails = new LoanDetails(12000, 200);
         assertEquals(expectedLoanDetails, loanDetails);
     }
 
@@ -31,7 +31,7 @@ public class LoanRegistryTest {
     public void testRegisterLoanWithEmiApproximation() {
         loanRegistry.registerLoan(customerIdentity, 101, 4, 5);
         LoanDetails loanDetails = loanRegistry.getLoanDetails(customerIdentity);
-        LoanDetails expectedLoanDetails = new LoanDetails(122, 48, 3);
+        LoanDetails expectedLoanDetails = new LoanDetails(122, 3);
         assertEquals(expectedLoanDetails, loanDetails);
     }
 }

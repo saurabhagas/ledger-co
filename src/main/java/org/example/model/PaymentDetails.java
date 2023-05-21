@@ -31,12 +31,4 @@ public class PaymentDetails {
     public int hashCode() {
         return Objects.hash(payment, postEmi);
     }
-
-    @Override
-    public String toString() {
-        return "PaymentDetails{" +
-            "payment=" + payment +
-            ", postEmi=" + postEmi +
-            '}';
-    }
 }

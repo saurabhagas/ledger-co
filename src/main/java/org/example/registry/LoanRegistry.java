@@ -17,7 +17,7 @@ public class LoanRegistry {
         int emis = years * 12;
         long dueAmount = principal + (long) Math.ceil((principal * years * interestRate) / 100.0);
         long emiVal = (long) Math.ceil(dueAmount / (double) emis);
-        LoanDetails loanDetails = new LoanDetails(dueAmount, emis, emiVal);
+        LoanDetails loanDetails = new LoanDetails(dueAmount, emiVal);
         registry.put(customerIdentity, loanDetails);
     }
 

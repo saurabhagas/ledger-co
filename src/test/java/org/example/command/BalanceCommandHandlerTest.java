@@ -67,7 +67,7 @@ public class BalanceCommandHandlerTest {
         CachingRegistryFactory registryFactory = mock(CachingRegistryFactory.class);
         LoanRegistry mockLoanRegistry = mock(LoanRegistry.class);
         when(mockLoanRegistry.hasLoan(any())).thenReturn(true);
-        when(mockLoanRegistry.getLoanDetails(any())).thenReturn(new LoanDetails(12000, 60, 200));
+        when(mockLoanRegistry.getLoanDetails(any())).thenReturn(new LoanDetails(12000, 200));
         when(registryFactory.getLoanRegistry()).thenReturn(mockLoanRegistry);
 
         PaymentRegistry mockPaymentRegistry = mock(PaymentRegistry.class);
@@ -84,7 +84,7 @@ public class BalanceCommandHandlerTest {
         LoanRegistry mockLoanRegistry = mock(LoanRegistry.class);
         CustomerIdentity customerIdentity = new CustomerIdentity("IDIDI", "Dale");
         when(mockLoanRegistry.hasLoan(customerIdentity)).thenReturn(true);
-        when(mockLoanRegistry.getLoanDetails(customerIdentity)).thenReturn(new LoanDetails(5300, 12, 442));
+        when(mockLoanRegistry.getLoanDetails(customerIdentity)).thenReturn(new LoanDetails(5300, 442));
         when(registryFactory.getLoanRegistry()).thenReturn(mockLoanRegistry);
 
         PaymentRegistry mockPaymentRegistry = mock(PaymentRegistry.class);
@@ -102,7 +102,7 @@ public class BalanceCommandHandlerTest {
         LoanRegistry mockLoanRegistry = mock(LoanRegistry.class);
         CustomerIdentity customerIdentity = new CustomerIdentity("IDIDI", "Dale");
         when(mockLoanRegistry.hasLoan(customerIdentity)).thenReturn(true);
-        when(mockLoanRegistry.getLoanDetails(customerIdentity)).thenReturn(new LoanDetails(5300, 12, 442));
+        when(mockLoanRegistry.getLoanDetails(customerIdentity)).thenReturn(new LoanDetails(5300, 442));
         when(registryFactory.getLoanRegistry()).thenReturn(mockLoanRegistry);
 
         PaymentRegistry mockPaymentRegistry = mock(PaymentRegistry.class);
