@@ -9,12 +9,11 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-public class BulkPaymentRegistry {
+public class PaymentRegistry {
     private final Map<CustomerIdentity, Set<PaymentDetails>> registry = new HashMap<>();
 
-    public void register(String bankName, String customerName, long payment, int postEmi) {
-        CustomerIdentity customerIdentity = new CustomerIdentity(bankName, customerName);
-        Set<PaymentDetails> existingPayments = registry.getOrDefault(customerIdentity, new HashSet<>());
+    public void register(CustomerIdentity customerIdentity, long payment, int postEmi) {
+        Set<PaymentDetails> existingPayments = registry.getOrDefault(customerIdentity, Collections.emptySet());
         Set<PaymentDetails> updatedPayments = new HashSet<>(existingPayments);
         updatedPayments.add(new PaymentDetails(payment, postEmi));
         registry.put(customerIdentity, updatedPayments);
@@ -26,5 +25,9 @@ public class BulkPaymentRegistry {
             .filter(paymentDetails -> paymentDetails.getPostEmi() <= emiNo)
             .mapToLong(PaymentDetails::getPayment)
             .sum();
+    }
+
+    Set<PaymentDetails> getAllPayments(CustomerIdentity customerIdentity) {
+        return registry.get(customerIdentity);
     }
 }

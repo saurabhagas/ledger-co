@@ -1,6 +1,8 @@
 package org.example.command;
 
 import org.example.exception.InvalidCommandFormatException;
+import org.example.exception.LoanAlreadyExistsException;
+import org.example.model.CustomerIdentity;
 import org.example.registry.CachingRegistryFactory;
 import org.example.registry.LoanRegistry;
 
@@ -13,11 +15,6 @@ public class LoanCommandHandler implements CommandHandler {
     public LoanCommandHandler(String commandName, CachingRegistryFactory registryFactory) {
         this.commandName = commandName;
         this.loanRegistry = registryFactory.getLoanRegistry();
-    }
-
-    @Override
-    public String getCommandName() {
-        return commandName;
     }
 
     @Override
@@ -41,10 +38,15 @@ public class LoanCommandHandler implements CommandHandler {
     public Optional<String> handle(String[] commandTokens) {
         String bankName = commandTokens[1];
         String customerName = commandTokens[2];
+        CustomerIdentity customerIdentity = new CustomerIdentity(bankName, customerName);
+        if (loanRegistry.hasLoan(customerIdentity)) {
+            throw new LoanAlreadyExistsException("A loan already exists for customer: " + customerIdentity);
+        }
+
         long principal = Integer.parseInt(commandTokens[3]);
         int years = Integer.parseInt(commandTokens[4]);
         int interestRate = Integer.parseInt(commandTokens[5]);
-        loanRegistry.registerLoan(bankName, customerName, principal, years, interestRate);
+        loanRegistry.registerLoan(customerIdentity, principal, years, interestRate);
         return Optional.empty();
     }
 }

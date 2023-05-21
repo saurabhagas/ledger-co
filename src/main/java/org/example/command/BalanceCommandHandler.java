@@ -4,26 +4,21 @@ import org.example.exception.InvalidCommandFormatException;
 import org.example.exception.NoLoanExistsException;
 import org.example.model.CustomerIdentity;
 import org.example.model.LoanDetails;
-import org.example.registry.BulkPaymentRegistry;
 import org.example.registry.CachingRegistryFactory;
 import org.example.registry.LoanRegistry;
+import org.example.registry.PaymentRegistry;
 
 import java.util.Optional;
 
 public class BalanceCommandHandler implements CommandHandler {
     private final String commandName;
     private final LoanRegistry loanRegistry;
-    private final BulkPaymentRegistry paymentRegistry;
+    private final PaymentRegistry paymentRegistry;
 
     public BalanceCommandHandler(String commandName, CachingRegistryFactory registryFactory) {
         this.commandName = commandName;
         this.loanRegistry = registryFactory.getLoanRegistry();
         this.paymentRegistry = registryFactory.getPaymentRegistry();
-    }
-
-    @Override
-    public String getCommandName() {
-        return commandName;
     }
 
     @Override

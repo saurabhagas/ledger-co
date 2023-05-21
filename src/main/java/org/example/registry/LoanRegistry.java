@@ -1,6 +1,5 @@
 package org.example.registry;
 
-import org.example.exception.LoanAlreadyExistsException;
 import org.example.model.CustomerIdentity;
 import org.example.model.LoanDetails;
 
@@ -14,11 +13,7 @@ public class LoanRegistry {
         this.registry = new HashMap<>();
     }
 
-    public void registerLoan(String bankName, String customerName, long principal, int years, int interestRate) throws LoanAlreadyExistsException {
-        CustomerIdentity customerIdentity = new CustomerIdentity(bankName, customerName);
-        if (hasLoan(customerIdentity)) {
-            throw new LoanAlreadyExistsException("A loan already exists for customer: " + customerIdentity);
-        }
+    public void registerLoan(CustomerIdentity customerIdentity, long principal, int years, int interestRate) {
         int emis = years * 12;
         long dueAmount = principal + (long) Math.ceil((principal * years * interestRate) / 100.0);
         long emiVal = (long) Math.ceil(dueAmount / (double) emis);

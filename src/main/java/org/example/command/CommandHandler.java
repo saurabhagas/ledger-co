@@ -1,23 +1,20 @@
 package org.example.command;
 
+import org.example.exception.InvalidCommandFormatException;
+
 import java.util.Optional;
 
 public interface CommandHandler {
     /**
-     * Get the command name handled by the given command handler
-     * @return the name of the command
-     */
-    String getCommandName();
-
-    /**
      * Validates the command
-     * @throws RuntimeException if command format is invalid or other preconditions aren't met
+     * @throws InvalidCommandFormatException if command format is invalid
      */
-    void validate(String[] commandTokens) throws RuntimeException;
+    void validate(String[] commandTokens) throws InvalidCommandFormatException;
 
     /**
      * Handles a validated command
      * @return an optional result
+     * @throws RuntimeException if preconditions or invariant-checks fail
      */
-    Optional<String> handle(String[] commandTokens);
+    Optional<String> handle(String[] commandTokens) throws RuntimeException;
 }

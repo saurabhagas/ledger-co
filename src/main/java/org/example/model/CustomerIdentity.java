@@ -23,4 +23,12 @@ public class CustomerIdentity {
     public int hashCode() {
         return Objects.hash(bankName, customerName);
     }
+
+    @Override
+    public String toString() {
+        return "CustomerIdentity{" +
+            "bankName='" + bankName + '\'' +
+            ", customerName='" + customerName + '\'' +
+            '}';
+    }
 }
